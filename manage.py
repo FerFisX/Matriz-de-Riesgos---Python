@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, send_file
 from flask_sqlalchemy import SQLAlchemy
 import pandas as pd
-import io
+import io , os
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///risks.db'
@@ -143,4 +143,5 @@ def download():
     return send_file(output, as_attachment=True, download_name="riesgos.xlsx", mimetype="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get("PORT", 5000))  # Usa el puerto proporcionado por Railway
+    app.run(host="0.0.0.0", port=port, debug=True)
