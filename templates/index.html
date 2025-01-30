@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matriz de Análisis de Riesgos</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Matriz de Análisis de Riesgos</h1>
+    </header>
+    <main>
+        <!-- Sección para agregar activos de información -->
+        <section class="form-section">
+            <h2>Agregar Activo de Información</h2>
+            <form action="/add_asset" method="post">
+                <input type="text" name="asset" placeholder="Nombre del Activo" required>
+                <button type="submit">Agregar Activo</button>
+            </form>
+        </section>
+
+        <!-- Sección para listar activos registrados -->
+        <section class="assets-section">
+            <h2>Activos Registrados</h2>
+            <ul>
+                {% for asset in assets %}
+                    <li>{{ asset.name }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <!-- Sección para agregar riesgos -->
+        <section class="form-section">
+            <h2>Agregar Riesgo</h2>
+            <form action="/add_risk" method="post">
+                <label for="asset">Activo:</label>
+                <select name="asset" required>
+                    {% for asset in assets %}
+                        <option value="{{ asset.id }}">{{ asset.name }}</option>
+                    {% endfor %}
+                </select>
+
+                <label for="threat">Amenaza:</label>
+                <input type="text" name="threat" required>
+
+                <label for="consequence">Consecuencia:</label>
+                <input type="text" name="consequence" required>
+
+                <label for="probability">Probabilidad (1-5):</label>
+                <input type="number" name="probability" min="1" max="5" required>
+
+                <label for="impact">Impacto (1-5):</label>
+                <input type="number" name="impact" min="1" max="5" required>
+
+                <label for="mitigation">Mitigación:</label>
+                <input type="text" name="mitigation">
+
+                <label for="control_type">Tipo de Control:</label><br>
+                <input type="checkbox" name="control_type" value="Preventivo"> Preventivo<br>
+                <input type="checkbox" name="control_type" value="Detectivo"> Detectivo<br>
+                <input type="checkbox" name="control_type" value="Correctivo"> Correctivo<br>
+                <input type="checkbox" name="control_type" value="Disuasivo"> Disuasivo<br>
+
+                <label for="control_level">Nivel de Control:</label>
+                <select name="control_level" required>
+                    <option value="Manual">Manual</option>
+                    <option value="Automático">Automático</option>
+                    <option value="Semi-automático">Semi-automático</option>
+                </select>
+
+                <label for="control_frequency">Frecuencia:</label>
+                <select name="control_frequency" required>
+                    <option value="Por evento/requerimiento">Por evento/requerimiento</option>
+                    <option value="Diario">Diario</option>
+                    <option value="Semanal">Semanal</option>
+                    <option value="Mensual">Mensual</option>
+                    <option value="Semestral">Semestral</option>
+                    <option value="Anual">Anual</option>
+                </select>
+
+                <label for="residual_probability">Probabilidad Residual (1-5):</label>
+                <input type="number" name="residual_probability" min="1" max="5" required>
+
+                <label for="residual_impact">Impacto Residual (1-5):</label>
+                <input type="number" name="residual_impact" min="1" max="5" required>
+
+                <button type="submit">Agregar Riesgo</button>
+            </form>
+        </section>
+
+        <!-- Tabla para mostrar los riesgos registrados -->
+        <section class="risks-section">
+            <h2>Riesgos Registrados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Activo</th>
+                        <th>Amenaza</th>
+                        <th>Consecuencia</th>
+                        <th>Probabilidad</th>
+                        <th>Impacto</th>
+                        <th>Riesgo Inherente</th>
+                        <th>Nivel de Riesgo</th>
+                        <th>Mitigación</th>
+                        <th>Tipo de Control</th>
+                        <th>Nivel</th>
+                        <th>Frecuencia</th>
+                        <th>Riesgo Residual</th>
+                        <th>Nivel de Riesgo Residual</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for risk in risks %}
+                    <tr>
+                        <td>{{ risk.asset.name }}</td>
+                        <td>{{ risk.threat }}</td>
+                        <td>{{ risk.consequence }}</td>
+                        <td>{{ risk.probability }}</td>
+                        <td>{{ risk.impact }}</td>
+                        <td>{{ risk.inherent_risk }}</td>
+                        <td class="risk-level-{{ risk.risk_level | lower }}">{{ risk.risk_level }}</td>
+                        <td>{{ risk.mitigation }}</td>
+                        <td>{{ risk.control_type }}</td>
+                        <td>{{ risk.control_level }}</td>
+                        <td>{{ risk.control_frequency }}</td>
+                        <td>{{ risk.residual_risk }}</td>
+                        <td class="risk-level-{{ risk.residual_level | lower }}">{{ risk.residual_level }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Botón para descargar datos en Excel -->
+        <section class="download-section">
+            <h2>Descargar Datos</h2>
+            <a href="/download" class="btn">Descargar en Excel</a>
+        </section>
+    </main>
+</body>
+</html>
