@@ -1,118 +1,99 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
+    background-color: #f4f4f4;
     margin: 0;
-    padding: 0;
-}
-
-header {
-    background-color: #2d3748;
-    color: white;
-    padding: 1rem 0;
-    text-align: center;
-}
-
-h1 {
-    margin: 0;
-    font-size: 2rem;
-}
-
-main {
-    width: 90%;
-    margin: 0 auto;
-    line-height: 1.6;
-}
-
-section {
-    margin-bottom: 20px;
-}
-
-section h2 {
-    margin-top: 0;
-    color: #2d3748;
-}
-
-.form-section {
     padding: 20px;
-    background-color: #edf2f7;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #333;
+}
+
+form {
+    background: white;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-.form-section input,
-.form-section select,
-.form-section button {
-    width: 100%;
+label {
+    font-weight: bold;
+    display: block;
     margin-top: 10px;
+}
+
+input, select, button {
+    width: 100%;
     padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #cbd5e0;
-    box-sizing: border-box;
+    margin-top: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
 }
 
-.form-section button {
-    background-color: #3182ce;
+button {
+    background-color: #007BFF;
     color: white;
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    border: none;
+    margin-top: 15px;
 }
 
-.form-section button:hover {
-    background-color: #2b6cb0;
+button:hover {
+    background-color: #0056b3;
+}
+
+.table-container {
+    max-width: 90%;
+    margin: 20px auto;
+    overflow-x: auto;
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
 
-table th, table td {
-    border: 1px solid #cbd5e0;
-    padding: 8px;
+table, th, td {
+    border: 1px solid #ddd;
     text-align: center;
+    padding: 10px;
 }
 
-table th {
-    background-color: #2d3748;
+th {
+    background-color: #007BFF;
     color: white;
 }
 
-table tbody tr:nth-child(even) {
-    background-color: #f7fafc;
+tr:nth-child(even) {
+    background-color: #f9f9f9;
 }
 
-.download-section .btn {
-    display: inline-block;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background-color: #3182ce;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+tr:hover {
+    background-color: #f1f1f1;
 }
 
-.download-section .btn:hover {
-    background-color: #2b6cb0;
+/* Estilos para los niveles de riesgo */
+.low-risk {
+    background-color: #c3e6cb;
 }
 
-.risk-level-muy-bajo {
-    background-color: #9ae6b4;
+.medium-risk {
+    background-color: #ffeeba;
 }
 
-.risk-level-bajo {
-    background-color: #68d391;
+.high-risk {
+    background-color: #f5c6cb;
 }
 
-.risk-level-medio {
-    background-color: #faf089;
-}
-
-.risk-level-alto {
-    background-color: #f6ad55;
-}
-
-.risk-level-crítico {
-    background-color: #fc8181;
+.critical-risk {
+    background-color: #dc3545;
     color: white;
 }
